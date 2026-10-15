@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PRO-FUNCHEESE</title>
+<meta name="description" content="PRO-FUNCHEESE: gluten-free, no-added-sugar, high-protein mini-cheesecakes structured with micellar casein. Innovation voucher, SC MIT SERV SRL (SAVEUR) and USAMV Cluj-Napoca.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lab notebook for a dessert - layered sections like the cake itself (base, cream, fruit), technical panels set on a quark-white ground */
+:root{
+  --bg:#FBF7F6; --surface:#FFFFFF; --sunk:#F4ECEC; --fg:#2A1A20; --muted:#6C5960; --line:#E6D9DA;
+  --rasp:#B0244E; --rasp-soft:#F6DCE3; --almond:#A87A45; --almond-soft:#F1E4D3; --violet:#6A3B78; --leaf:#47714B;
+  --quark:#FFFDFB; --cream-fill:#FBF3EC; --hatch:#D8C7C9;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --maxw:1160px; --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#171013; --surface:#20171B; --sunk:#2A1F24; --fg:#F2E8EB; --muted:#B39FA6; --line:#3B2D33;
+  --rasp:#F06A90; --rasp-soft:#4A1E2C; --almond:#D9AE7A; --almond-soft:#3A2C1F; --violet:#C08ED0; --leaf:#8CC08F;
+  --quark:#EDE3DE; --cream-fill:#3A2F2C; --hatch:#4B3B41; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#171013; --surface:#20171B; --sunk:#2A1F24; --fg:#F2E8EB; --muted:#B39FA6; --line:#3B2D33;
+  --rasp:#F06A90; --rasp-soft:#4A1E2C; --almond:#D9AE7A; --almond-soft:#3A2C1F; --violet:#C08ED0; --leaf:#8CC08F;
+  --quark:#EDE3DE; --cream-fill:#3A2F2C; --hatch:#4B3B41; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--rasp);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--rasp);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.02em}
+h3{font-size:20px;font-weight:600}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:18px;color:var(--muted);max-width:64ch}
+.num{font-variant-numeric:tabular-nums}
+em.sp{font-style:italic}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.brand{font-family:var(--display);font-weight:800;font-size:18px;color:var(--fg);text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--rasp);box-shadow:5px -4px 0 -2px var(--leaf)}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1;justify-content:flex-end}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.l{display:block;padding:6px 10px;border-radius:6px;font-size:14px;color:var(--muted);text-decoration:none;white-space:nowrap}
+.nav a.l:hover,.nav a.l.on{color:var(--fg);background:var(--sunk)}
+
+/* sections */
+section{padding-block:clamp(56px,8vw,96px);border-bottom:1px solid var(--line)}
+.sec-head{display:grid;gap:14px;margin-bottom:36px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:32px;align-items:start}
+.grid2>*{min-width:0}
+
+/* hero */
+.hero{padding-block:clamp(40px,6vw,72px) clamp(48px,7vw,88px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(46px,8vw,92px);font-weight:800;letter-spacing:-.035em;line-height:.95}
+.hero h1 span{color:var(--rasp)}
+.hero .tag{font-family:var(--display);font-size:clamp(20px,2.4vw,26px);font-weight:400;margin-top:18px;max-width:30ch;line-height:1.25}
+.hero .desc{margin-top:18px;color:var(--muted);max-width:58ch}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:32px}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--surface);padding:14px 16px;display:grid;gap:2px}
+.stat b{font-family:var(--display);font-size:28px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--muted);line-height:1.35}
+.anatomy{width:100%;max-width:580px;margin:0;justify-self:center}
+.anatomy svg{width:100%;height:auto;display:block}
+.anatomy text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.anatomy text.k{font-family:var(--body);font-weight:600;font-size:13px;fill:var(--fg)}
+
+/* concept */
+.facts{display:grid;gap:0;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.facts dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:3px}
+.facts dd{margin:0}
+@media (max-width:520px){.facts div{grid-template-columns:1fr;gap:2px}}
+.prose{display:grid;gap:14px;max-width:64ch}
+
+/* gelling comparison */
+.gel{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.gel-top{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:700px){.gel-top{grid-template-columns:1fr}}
+.gel-card{padding:22px;display:grid;gap:10px;align-content:start}
+.gel-card+.gel-card{border-left:1px solid var(--line)}
+@media (max-width:700px){.gel-card+.gel-card{border-left:0;border-top:1px solid var(--line)}}
+.gel-card .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.gel-card.g .role{color:var(--almond)} .gel-card.c .role{color:var(--rasp)}
+.gel-card .fig{margin:4px 0;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.gel-card .fig img{display:block;width:100%;height:auto}
+.gel-card p{font-size:14.5px;color:var(--muted)}
+.cmp{width:100%;border-collapse:collapse;font-size:14px}
+.cmp-wrap{overflow-x:auto;border-top:1px solid var(--line)}
+.cmp th,.cmp td{padding:12px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.cmp thead th{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--sunk)}
+.cmp tbody th{font-weight:500;width:24%;min-width:150px}
+.cmp td.v{font-family:var(--mono);font-size:13px;white-space:nowrap;width:14%}
+.cmp td.bar{width:48%;min-width:220px}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.track{position:relative;height:30px}
+.track .ax{position:absolute;left:0;right:0;top:14px;height:2px;background:var(--line)}
+.track .rg{position:absolute;height:9px;border-radius:5px}
+.track .rg.g{top:4px;background:var(--almond)} .track .rg.c{top:17px;background:var(--rasp)}
+.track .rg.ub{background:repeating-linear-gradient(135deg,var(--almond) 0 3px,transparent 3px 6px);border:1px solid var(--almond)}
+.track .tk{position:absolute;top:-1px;font-family:var(--mono);font-size:10px;color:var(--muted);transform:translateX(-50%)}
+.track .tk.r{transform:translateX(-100%)} .track .tk.l{transform:none}
+.track .tkw{position:absolute;inset:auto 0 -12px 0;height:12px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;padding:12px 16px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+.legend i{display:inline-block;width:14px;height:8px;border-radius:4px;margin-right:6px;vertical-align:middle}
+
+/* objectives / WPs */
+.objs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+.obj{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:10px;align-content:start;border-top:4px solid var(--c)}
+.obj .code{font-family:var(--mono);font-size:13px;color:var(--c);font-weight:500}
+.obj p{font-size:14.5px;color:var(--muted)}
+.wps{margin-top:40px;display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.wp{display:grid;grid-template-columns:72px minmax(0,1fr) 120px;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line);align-items:start}
+.wp:last-child{border-bottom:0}
+.wp .id{font-family:var(--display);font-weight:800;font-size:22px}
+.wp h4{font-family:var(--body);font-size:15.5px;font-weight:600;margin-bottom:4px}
+.wp p{font-size:14px;color:var(--muted)}
+.wp .os{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:620px){.wp{grid-template-columns:52px minmax(0,1fr)}.wp .os{grid-column:2;justify-content:flex-start}}
+.pill{font-family:var(--mono);font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--c);color:var(--c);white-space:nowrap}
+
+/* activities + gantt */
+.gantt-box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 0 8px}
+.gantt-head{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;padding:0 18px 14px}
+.gantt-head .legend{border:0;padding:0}
+.gscroll{overflow-x:auto}
+.gantt{display:grid;grid-template-columns:200px 132px repeat(24,minmax(24px,1fr));min-width:900px;font-size:13px;padding:0 18px}
+.gantt .h{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:center;padding:4px 0 8px;border-bottom:1px solid var(--line)}
+.gantt .h.lab{text-align:left}
+.gantt .m{font-family:var(--mono);font-size:10.5px;color:var(--muted);text-align:center;border-bottom:1px solid var(--line);padding:6px 0 2px;letter-spacing:.06em}
+.gantt .row{display:contents;cursor:pointer}
+.gantt .c{border-bottom:1px solid var(--line);height:40px;position:relative}
+.gantt .c.alt{background:var(--sunk)}
+.gantt .lab{display:flex;align-items:center;gap:8px;padding-right:10px;min-width:0}
+.gantt .lab b{font-family:var(--mono);font-weight:500;font-size:12.5px;color:var(--c)}
+.gantt .lab span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gantt .who{display:flex;align-items:center;gap:3px}
+.gantt .who i{font-style:normal;font-family:var(--mono);font-size:10px;width:28px;height:20px;display:grid;place-items:center;border-radius:4px;background:var(--sunk);color:var(--muted)}
+.gantt .who i.on{background:var(--fg);color:var(--bg)}
+.gantt .b{position:absolute;top:11px;height:18px;border-radius:5px;background:var(--c);z-index:1;opacity:.92}
+.gantt .row.dim .b{opacity:.18}
+.gantt .row.sel .c{background:color-mix(in srgb,var(--c) 10%,transparent)}
+.gantt-note{padding:10px 18px 4px;font-size:12.5px;color:var(--muted)}
+
+.acts{display:grid;gap:12px;margin-top:28px}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.act summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px 18px}
+.act summary::-webkit-details-marker{display:none}
+.act .aid{font-family:var(--display);font-weight:800;font-size:22px;color:var(--c)}
+.act .at{font-weight:600;font-size:15.5px}
+.act .meta{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.act .chev{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .2s}
+.act[open] .chev{transform:rotate(45deg)}
+.act .body{padding:0 18px 18px 88px;display:grid;gap:12px;font-size:15px}
+@media (max-width:620px){.act .body{padding-left:18px}.act summary{grid-template-columns:44px minmax(0,1fr) auto}}
+.act .body ul{margin:0;padding-left:18px;display:grid;gap:4px;color:var(--muted)}
+.deliv{display:flex;gap:10px;align-items:flex-start;background:var(--sunk);border-radius:8px;padding:10px 12px;font-size:14px}
+.deliv b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);padding-top:2px;white-space:nowrap}
+
+/* methods matrix */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{font:inherit;font-size:13.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chip .n{font-family:var(--mono);font-size:11px;opacity:.7;margin-left:4px}
+.mtx-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.mtx{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+.mtx th,.mtx td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.mtx thead th{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--sunk);position:sticky;top:0}
+.mtx tr:last-child td{border-bottom:0}
+.mtx td.cat{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.mtx td.a{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.mtx td.p{font-weight:500}
+
+/* infogest */
+.ig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:8px}
+@media (max-width:860px){.ig{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+@media (max-width:480px){.ig{grid-template-columns:1fr}}
+.ph{position:relative;background:var(--surface);border:1px solid var(--line);padding:18px 18px 16px;display:grid;gap:8px;align-content:start}
+.ig .ph:first-child{border-radius:var(--r) 0 0 var(--r)} .ig .ph:last-child{border-radius:0 var(--r) var(--r) 0}
+.ig .ph+.ph{border-left:0}
+@media (max-width:860px){.ig .ph{border-radius:var(--r)!important;border-left:1px solid var(--line)!important}}
+.ph .pn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ph h4{font-size:19px;font-weight:600}
+.ph dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13.5px}
+.ph dt{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.ph dd{margin:0;font-variant-numeric:tabular-nums}
+.ph .ph-bar{height:6px;border-radius:3px;background:var(--c)}
+.ph.out{background:var(--rasp-soft);border-color:transparent}
+.src{font-size:12.5px;color:var(--muted);margin-top:14px}
+
+/* claim calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+@media (max-width:820px){.calc{grid-template-columns:1fr}}
+.calc form{padding:22px;display:grid;gap:12px;border-right:1px solid var(--line);align-content:start}
+@media (max-width:820px){.calc form{border-right:0;border-bottom:1px solid var(--line)}}
+.fld{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:12px;align-items:center}
+.fld label{font-size:14.5px}
+.fld label small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.fld .in{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:0 10px}
+.fld input{width:100%;border:0;background:transparent;color:var(--fg);font-family:var(--mono);font-size:15px;padding:8px 0;text-align:right}
+.fld input:focus{outline:none}
+.fld .in:focus-within{border-color:var(--rasp)}
+.fld .in span{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:6px}
+.ex-tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--almond);background:var(--almond-soft);padding:3px 8px;border-radius:4px;justify-self:start}
+.calc-out{padding:22px;display:grid;gap:18px;align-content:start}
+.big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.big b{font-family:var(--display);font-size:clamp(48px,7vw,72px);font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.big span{color:var(--muted)}
+.verdict{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:5px 12px;border-radius:999px;justify-self:start}
+.verdict.hi{background:var(--rasp);color:var(--bg)} .verdict.src{background:var(--almond-soft);color:var(--almond)} .verdict.no{background:var(--sunk);color:var(--muted)}
+.gauge{position:relative;height:56px;margin-top:4px}
+.gauge .tr{position:absolute;left:0;right:0;top:18px;height:14px;border-radius:7px;background:var(--sunk);overflow:hidden}
+.gauge .fill{position:absolute;left:0;top:0;bottom:0;background:var(--rasp);border-radius:7px;transition:width .3s}
+.gauge .th{position:absolute;top:10px;height:30px;width:2px;background:var(--fg)}
+.gauge .th span{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;white-space:nowrap;color:var(--fg)}
+.gauge .sc{position:absolute;top:40px;font-family:var(--mono);font-size:10px;color:var(--muted);transform:translateX(-50%)}
+.ebreak{display:grid;gap:6px}
+.ebar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--sunk)}
+.ebar i{display:block;height:100%}
+.ekeys{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);font-family:var(--mono)}
+.ekeys i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.kv div{display:grid;gap:2px}
+.kv dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kv dd{margin:0;font-family:var(--mono);font-size:16px;font-variant-numeric:tabular-nums}
+
+/* impact */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px}
+.kpi{border-top:2px solid var(--fg);padding-top:14px;display:grid;gap:6px;align-content:start}
+.kpi b{font-family:var(--display);font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:14px;color:var(--muted)}
+.risk{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:40px}
+.rk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:10px;align-content:start}
+.rk .lvl{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.rk p{font-size:14.5px;color:var(--muted)}
+.rk .mit{font-size:14.5px;border-top:1px dashed var(--line);padding-top:10px}
+.ctx{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ctx div{background:var(--surface);padding:16px 18px;display:grid;gap:4px}
+.ctx b{font-family:var(--mono);font-size:20px;font-weight:500}
+.ctx span{font-size:13.5px;color:var(--muted)}
+
+/* results */
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.ri{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.ri .st{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.ri p{font-size:14.5px}
+.ri small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:2px}
+.note{margin-top:20px;font-size:14px;color:var(--muted);border-left:3px solid var(--almond);padding:4px 0 4px 14px;max-width:70ch}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.mem{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.ph-img{aspect-ratio:1/1;max-width:100%;background:var(--sunk);position:relative;display:grid;place-items:center;overflow:hidden}
+.ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.ph-img .ini{font-family:var(--display);font-size:56px;font-weight:800;color:var(--c);letter-spacing:-.03em}
+.mem .in{padding:16px 18px 18px;display:grid;gap:8px;align-content:start}
+.mem .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--c)}
+.mem h3{font-size:19px}
+.mem p{font-size:14px;color:var(--muted)}
+.mem .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.mem .tags span{font-family:var(--mono);font-size:11px;background:var(--sunk);padding:2px 7px;border-radius:4px;color:var(--muted)}
+
+/* partners */
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px}
+.pc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:14px;align-content:start}
+.pc .badge{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;justify-self:start}
+.pc .badge.b{background:var(--rasp-soft);color:var(--rasp)} .pc .badge.p{background:var(--almond-soft);color:var(--almond)}
+.pc p{font-size:14.5px;color:var(--muted)}
+.pc ul{margin:0;padding-left:18px;font-size:14px;color:var(--muted);display:grid;gap:3px}
+.logo-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.logo{height:52px;min-width:52px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:8px;padding:6px 10px;border:1px solid var(--line)}
+.logo img{height:100%;width:auto;display:block}
+.logo .fb{font-family:var(--display);font-weight:800;font-size:15px;color:#2A1A20;letter-spacing:-.01em}
+.wordmark{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:.08em;color:var(--rasp)}
+.wordmark small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);font-weight:400}
+.pfacts{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 24px}
+.ph-todo{background:var(--almond-soft);color:var(--almond);font-family:var(--mono);font-size:12.5px;padding:1px 6px;border-radius:4px}
+.budget{display:grid;gap:10px;padding:18px 0}
+.bbar{display:flex;height:34px;border-radius:8px;overflow:hidden;gap:2px}
+.bbar div{display:flex;align-items:center;padding:0 10px;font-family:var(--mono);font-size:12px;color:var(--bg);white-space:nowrap;overflow:hidden}
+.bkeys{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px 18px;font-size:13.5px}
+.bkeys div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted var(--line);padding:3px 0}
+.bkeys b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* refs */
+.refs{columns:2 380px;column-gap:40px;font-size:13.5px;color:var(--muted);padding:0;margin:0;list-style:none;counter-reset:r}
+.refs li{break-inside:avoid;padding:0 0 10px 34px;position:relative;counter-increment:r}
+.refs li::before{content:counter(r);position:absolute;left:0;top:0;font-family:var(--mono);font-size:12px;color:var(--rasp)}
+.refs i{color:var(--fg)}
+
+/* contact/footer */
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:32px;align-items:start}
+.cc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:10px}
+.cc .mail{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:6px}
+.cc code{font-family:var(--mono);font-size:14px;background:var(--sunk);padding:6px 10px;border-radius:6px;user-select:all;word-break:break-all}
+.btn{font:inherit;font-size:13.5px;padding:7px 14px;border-radius:8px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer}
+footer{padding-block:40px 56px}
+footer .wrap{display:grid;gap:20px}
+.ack{font-size:14px;color:var(--muted);max-width:90ch}
+.upd{font-family:var(--mono);font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>PRO-FUNCHEESE</a>
+    <ul id="navlist">
+      <li><a class="l" href="#about">About</a></li>
+      <li><a class="l" href="#gelling">Gelling</a></li>
+      <li><a class="l" href="#objectives">Objectives</a></li>
+      <li><a class="l" href="#activities">Activities</a></li>
+      <li><a class="l" href="#digestion">Digestion</a></li>
+      <li><a class="l" href="#claim">Protein claim</a></li>
+      <li><a class="l" href="#impact">Impact</a></li>
+      <li><a class="l" href="#team">Team</a></li>
+      <li><a class="l" href="#partners">Partners</a></li>
+      <li><a class="l" href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Innovation voucher · USAMV Cluj-Napoca × SAVEUR · 2 Jul - 31 Dec 2026</p>
+      <h1>PRO<span>-</span>FUNCHEESE</h1>
+      <p class="tag">Functional, high-protein, gluten-free mini-cheesecakes, structured with micellar casein.</p>
+      <p class="desc">We develop and validate a portioned dessert with no gluten and no added sugar: an almond-flour base, a quark and raspberry cream, and a protein gelling system that replaces bovine gelatin with micellar casein. The aim is a firmer, cleaner-cutting cream that also qualifies as "high protein", ready for production by the beneficiary.</p>
+      <div class="stats">
+        <div class="stat"><b class="num">≥20%</b><span>energy from protein, "high protein" target</span></div>
+        <div class="stat"><b class="num">2</b><span>gelling systems compared: gelatin vs micellar casein</span></div>
+        <div class="stat"><b class="num">24</b><span>weeks, 5 work packages, 8 activities</span></div>
+        <div class="stat"><b class="num">≥7 d</b><span>target shelf life under refrigeration</span></div>
+      </div>
+    </div>
+    <figure class="anatomy" aria-label="Cross-section of the mini-cheesecake with its three layers">
+      <svg viewBox="0 0 540 400" role="img">
+        <defs>
+          <pattern id="crumb" width="12" height="12" patternUnits="userSpaceOnUse">
+            <rect width="12" height="12" fill="var(--almond)"/>
+            <circle cx="3" cy="4" r="1.4" fill="var(--almond-soft)" opacity=".7"/>
+            <circle cx="9" cy="9" r="1.1" fill="var(--almond-soft)" opacity=".55"/>
+          </pattern>
+          <pattern id="micelle" width="16" height="16" patternUnits="userSpaceOnUse">
+            <rect width="16" height="16" fill="var(--quark)"/>
+            <circle cx="4" cy="5" r="2.2" fill="var(--rasp)" opacity=".13"/>
+            <circle cx="12" cy="12" r="2.6" fill="var(--rasp)" opacity=".1"/>
+            <circle cx="12" cy="3" r="1.4" fill="var(--rasp)" opacity=".12"/>
+          </pattern>
+        </defs>
+        <!-- plate shadow -->
+        <ellipse cx="200" cy="350" rx="150" ry="16" fill="var(--line)"/>
+        <!-- base -->
+        <path d="M70 300 L330 300 L330 340 Q200 352 70 340 Z" fill="url(#crumb)"/>
+        <ellipse cx="200" cy="300" rx="130" ry="18" fill="var(--almond)"/>
+        <!-- cream -->
+        <path d="M70 160 L330 160 L330 300 Q200 318 70 300 Z" fill="url(#micelle)" stroke="var(--line)"/>
+        <ellipse cx="200" cy="160" rx="130" ry="20" fill="var(--quark)" stroke="var(--line)"/>
+        <!-- raspberry layer -->
+        <ellipse cx="200" cy="158" rx="118" ry="15" fill="var(--rasp)" opacity=".85"/>
+        <g id="berries"></g>
+        <!-- leaders -->
+        <g stroke="var(--muted)" stroke-width="1" fill="none">
+          <path d="M300 120 L356 92 L372 92"/>
+          <path d="M330 230 L372 230"/>
+          <path d="M330 322 L372 322"/>
+        </g>
+        <text class="k" x="376" y="88">Fresh raspberry</text>
+        <text x="376" y="104">polyphenols, colour</text>
+        <text class="k" x="376" y="226">Quark cream</text>
+        <text x="376" y="242">+ micellar casein</text>
+        <text x="376" y="256">or gelatin (control)</text>
+        <text class="k" x="376" y="318">Almond base</text>
+        <text x="376" y="334">almond flour, egg,</text>
+        <text x="376" y="348">Green Sugar</text>
+        <!-- scale -->
+        <g stroke="var(--muted)" stroke-width="1"><path d="M40 160 L40 340 M36 160 L44 160 M36 340 L44 340"/></g>
+        <text x="20" y="254" transform="rotate(-90 20 254)" text-anchor="middle">single-portion format</text>
+      </svg>
+    </figure>
+  </div>
+</header>
+
+<main>
+<section id="about">
+  <div class="wrap grid2">
+    <div class="sec-head" style="margin:0">
+      <p class="eyebrow">About the project</p>
+      <h2>A gluten-free dessert that does real nutritional work</h2>
+      <div class="prose" style="margin-top:10px">
+        <p class="lead">SAVEUR launched its first gluten-free product through a 2017 CEC voucher developed with USAMV Cluj-Napoca. Consumer feedback confirmed the demand. This project extends the range beyond classic pastry, toward desserts with higher nutritional value.</p>
+        <p>Mini-cheesecakes are a hard matrix to reformulate. Each portion combines a baked base and a set cream, and the cream must hold its shape, cut cleanly and stay stable in cold storage. Removing gluten and added sugar takes away two structural tools. Raising protein to "high protein" levels adds a third constraint.</p>
+        <p>The central innovation is the protein gelling system of the cream. A bovine gelatin control is compared with micellar casein, a native milk protein with a complete essential amino acid profile, high water binding and slow digestion. The comparison is technological (rheology, texture, stability) and nutritional (composition, amino acids, <em class="sp">in vitro</em> digestibility).</p>
+      </div>
+    </div>
+    <dl class="facts">
+      <div><dt>Product</dt><dd>Individually portioned mini-cheesecake, gluten-free, no added sugar</dd></div>
+      <div><dt>Base</dt><dd>Almond flour, eggs, Green Sugar sweetener (low glycaemic index); identical across all variants</dd></div>
+      <div><dt>Cream</dt><dd>Quark cheese with fresh raspberries</dd></div>
+      <div><dt>Control</dt><dd>Bovine gelatin as the gelling agent</dd></div>
+      <div><dt>Innovation</dt><dd>Micellar casein as protein structuring agent, tested at several levels, hydration modes and incorporation conditions</dd></div>
+      <div><dt>Target</dt><dd>"High protein" claim, ≥7 days refrigerated shelf life, validated recipe and technical file for transfer</dd></div>
+      <div><dt>Starting point</dt><dd>Experimental development; no patent or patent application at submission</dd></div>
+      <div><dt>IP</dt><dd>National patent application planned for the formulation and protein structuring approach</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="gelling">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Core comparison · WP2</p>
+      <h2>Two ways to set a cream</h2>
+      <p class="lead">Gelatin sets by forming a thermoreversible network of helical junction zones. Micellar casein builds a dense, creamy structure through colloidal particles that bind water, without classical thermal gelation.</p>
+    </div>
+    <div class="gel">
+      <div class="gel-top">
+        <div class="gel-card g">
+          <span class="role">Control · bovine gelatin</span>
+          <h3>Collagen-derived network</h3>
+          <figure class="fig"><img src="gel.jpg" alt="From collagen triple helix through partial hydrolysis to single gelatin chains, which on cooling form a thermoreversible gel network with triple-helix junction zones; inset shows the Gly-X-Y repeat with glycine, proline and hydroxyproline" width="1016" height="633"></figure>
+          <p>Partial hydrolysis product of collagen. Gels at 1-3%, sets at 20-30 °C and melts near 30-35 °C, giving an elastic texture and a clean cut. Its amino acid profile is dominated by glycine (≈33%) and proline + hydroxyproline (22-25%), with very little essential amino acid content.</p>
+        </div>
+        <div class="gel-card c">
+          <span class="role">Innovation · micellar casein</span>
+          <h3>Native casein micelles</h3>
+          <figure class="fig"><img src="cas.jpg" alt="Casein micelle of 100-300 nm with alpha-s1, alpha-s2 and beta-casein submicelles, colloidal calcium phosphate nanoclusters and a kappa-casein hairy layer providing steric and electrostatic stabilisation" width="1012" height="633"></figure>
+          <p>About 80% of milk protein, isolated by micro- or ultrafiltration that keeps the native micelles (100-300 nm) stabilised by colloidal calcium phosphate. Binds 3-4 g water per g protein, structures creams at 3-6%, and is digested slowly over 5-7 h, with leucine at 8-10%.</p>
+        </div>
+      </div>
+      <div class="cmp-wrap">
+        <table class="cmp">
+          <thead><tr><th>Property</th><th>Gelatin</th><th>Micellar casein</th><th>Scale</th></tr></thead>
+          <tbody id="cmp-body"></tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--almond)"></i>Bovine gelatin</span>
+        <span><i style="background:var(--rasp)"></i>Micellar casein</span>
+        <span><i style="background:repeating-linear-gradient(135deg,var(--almond) 0 3px,transparent 3px 6px);border:1px solid var(--almond)"></i>Upper bound only</span>
+        <span>Literature values</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="objectives">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Objectives and work packages</p>
+      <h2>Four objectives, five work packages</h2>
+    </div>
+    <div class="objs" id="objs"></div>
+    <div class="wps" id="wps"></div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Work plan</p>
+      <h2>Eight activities in 24 weeks</h2>
+      <p class="lead">The work runs from recipe development to transfer, with characterisation and digestion studies overlapping in the second half. Select a row to highlight it.</p>
+    </div>
+    <div class="gantt-box">
+      <div class="gantt-head">
+        <div class="legend" id="glegend"></div>
+        <span class="eyebrow">Weeks 1-24</span>
+      </div>
+      <div class="gscroll"><div class="gantt" id="gantt" role="table" aria-label="Gantt chart of activities A1 to A8"></div></div>
+      <p class="gantt-note">PL Oana Lelia Pop · M1 Călina Ciont · M2 Ligia Pop · M3 Alina-Ionița Coman. Highlighted initials show who works on each activity.</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="digestion">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">A7 · WP4 · <em class="sp">in vitro</em> digestion</p>
+      <h2>Following the protein through a simulated gut</h2>
+      <p class="lead">The final variants are digested sequentially with the standardised INFOGEST static protocol, using simulated salivary, gastric and intestinal fluids. The bioaccessible intestinal fraction is then analysed.</p>
+    </div>
+    <div class="ig">
+      <div class="ph" style="--c:var(--almond)">
+        <span class="pn">Phase 1</span><h4>Oral</h4><div class="ph-bar"></div>
+        <dl><dt>Fluid</dt><dd>Simulated salivary fluid</dd><dt>Ratio</dt><dd>1:1 (w/v)</dd><dt>pH</dt><dd>7</dd><dt>Time</dt><dd>2 min</dd><dt>Enzyme</dt><dd>α-amylase, 75 U/mL</dd></dl>
+      </div>
+      <div class="ph" style="--c:var(--violet)">
+        <span class="pn">Phase 2</span><h4>Gastric</h4><div class="ph-bar"></div>
+        <dl><dt>Fluid</dt><dd>Simulated gastric fluid</dd><dt>Ratio</dt><dd>1:1 (v/v)</dd><dt>pH</dt><dd>3</dd><dt>Time</dt><dd>2 h</dd><dt>Enzyme</dt><dd>Pepsin, 2000 U/mL</dd></dl>
+      </div>
+      <div class="ph" style="--c:var(--leaf)">
+        <span class="pn">Phase 3</span><h4>Intestinal</h4><div class="ph-bar"></div>
+        <dl><dt>Fluid</dt><dd>Simulated intestinal fluid</dd><dt>Ratio</dt><dd>1:1 (v/v)</dd><dt>pH</dt><dd>7</dd><dt>Time</dt><dd>2 h</dd><dt>Enzyme</dt><dd>Pancreatin (trypsin 100 U/mL), bile 10 mM</dd></dl>
+      </div>
+      <div class="ph out" style="--c:var(--rasp)">
+        <span class="pn">Output</span><h4>Bioaccessible fraction</h4><div class="ph-bar"></div>
+        <dl><dt>1</dt><dd>Soluble protein content</dd><dt>2</dt><dd>Amino acid profile (LC-MS)</dd><dt>3</dt><dd>Antioxidant activity after digestion</dd></dl>
+      </div>
+    </div>
+    <p class="src">Phase conditions are the INFOGEST 2.0 reference values (Brodkorb et al., <em class="sp">Nature Protocols</em>, 2019). Any adaptation to the cheesecake matrix will be reported with the A7 results.</p>
+  </div>
+</section>
+
+<section id="claim">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Regulatory target · WP3</p>
+      <h2>When is a dessert "high protein"?</h2>
+      <p class="lead">Under Regulation (EC) No 1924/2006, a food may claim "high protein" when at least 20% of its energy value comes from protein, and "source of protein" from 12%. Energy is calculated with the conversion factors of Regulation (EU) No 1169/2011. Try the calculation below.</p>
+    </div>
+    <div class="calc">
+      <form id="calc" autocomplete="off">
+        <span class="ex-tag">Example values · not project data</span>
+        <div class="fld"><label for="f-p">Protein<small>4 kcal/g · 17 kJ/g</small></label><div class="in"><input id="f-p" type="number" min="0" step="0.1" value="13"><span>g</span></div></div>
+        <div class="fld"><label for="f-c">Carbohydrate (excl. polyols)<small>4 kcal/g · 17 kJ/g</small></label><div class="in"><input id="f-c" type="number" min="0" step="0.1" value="9"><span>g</span></div></div>
+        <div class="fld"><label for="f-y">Polyols<small>2.4 kcal/g · 10 kJ/g (erythritol 0)</small></label><div class="in"><input id="f-y" type="number" min="0" step="0.1" value="0"><span>g</span></div></div>
+        <div class="fld"><label for="f-f">Fat<small>9 kcal/g · 37 kJ/g</small></label><div class="in"><input id="f-f" type="number" min="0" step="0.1" value="15"><span>g</span></div></div>
+        <div class="fld"><label for="f-d">Fibre<small>2 kcal/g · 8 kJ/g</small></label><div class="in"><input id="f-d" type="number" min="0" step="0.1" value="2"><span>g</span></div></div>
+        <p class="src" style="margin:0">Per 100 g of product.</p>
+      </form>
+      <div class="calc-out" aria-live="polite">
+        <div>
+          <span class="eyebrow">Share of energy from protein</span>
+          <div class="big"><b id="o-pct">-</b><span>% of energy</span></div>
+        </div>
+        <span class="verdict" id="o-v">-</span>
+        <div class="gauge" aria-hidden="true">
+          <div class="tr"><div class="fill" id="o-fill"></div></div>
+          <div class="th" style="left:24%"><span>12% source</span></div>
+          <div class="th" style="left:40%"><span>20% high</span></div>
+          <span class="sc" style="left:0;transform:none">0</span><span class="sc" style="left:50%">25</span><span class="sc" style="left:100%;transform:translateX(-100%)">50%</span>
+        </div>
+        <div class="ebreak">
+          <span class="eyebrow">Energy breakdown</span>
+          <div class="ebar" id="o-bar"></div>
+          <div class="ekeys" id="o-keys"></div>
+        </div>
+        <dl class="kv">
+          <div><dt>Energy</dt><dd id="o-kcal">-</dd></div>
+          <div><dt>Energy</dt><dd id="o-kj">-</dd></div>
+          <div><dt>Protein for 20%</dt><dd id="o-need">-</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="impact">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Expected socio-economic impact</p>
+      <h2>Why it matters, for consumers and for SAVEUR</h2>
+      <p class="lead">For people with coeliac disease a gluten-free diet is the only treatment. The project also answers a broader demand for desserts with no added sugar and more protein, and strengthens the beneficiary's position in that niche.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><b>≥1</b><span>new product in SAVEUR's commercial portfolio</span></div>
+      <div class="kpi"><b>+10%</b><span>turnover within 12 months of the product launch</span></div>
+      <div class="kpi"><b>≥1</b><span>new market segment: gluten-free high-protein desserts</span></div>
+      <div class="kpi"><b>1</b><span>national patent application for the formulation</span></div>
+    </div>
+    <div class="ctx">
+      <div><b>160+</b><span>certified gluten-free products on Romanian shelves</span></div>
+      <div><b>≈30%</b><span>of urban Romanians eat sugar-free sweets, more among 15-34 year-olds</span></div>
+      <div><b>&gt;13 bn USD</b><span>projected global gluten-free market by 2030</span></div>
+    </div>
+    <div class="risk">
+      <div class="rk">
+        <span class="lvl" style="color:var(--rasp)">Main technological risk</span>
+        <h3>Protein falls short of the "high protein" threshold</h3>
+        <p>The matrix must combine adequate texture, structural stability and sensory acceptance without gluten or added sugar, which limits how much protein can be added.</p>
+        <p class="mit"><b>Mitigation:</b> controlled addition of whey protein isolate, adjusted until the threshold is reached.</p>
+      </div>
+      <div class="rk">
+        <span class="lvl" style="color:var(--leaf)">Commercial risk · low</span>
+        <h3>Market dynamics and purchasing power</h3>
+        <p>Consumer behaviour depends on the wider economy. Demand for gluten-free, no-added-sugar and high-protein desserts is growing.</p>
+        <p class="mit"><b>Mitigation:</b> established brand, a proven gluten-free launch in 2017, and a product validated technologically and nutritionally before launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Implementation team · USAMV Cluj-Napoca</p>
+      <h2>The researchers</h2>
+    </div>
+    <div class="team" id="teamgrid"></div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Partners</p>
+      <h2>A confectioner and a university, for the second time</h2>
+      <p class="lead">The collaboration builds on the 2017 innovation voucher PN-III-P2-2.1-CI-2017-0056, which led to SAVEUR's first gluten-free product.</p>
+    </div>
+    <div class="partners">
+      <article class="pc">
+        <span class="badge b">Beneficiary</span>
+        <div class="logo-row"><span class="logo" style="height:76px;padding:8px 14px"><img src="saveur.png" alt="SAVEUR, cofetărie și patiserie"></span></div>
+        <h3>SC MIT SERV SRL · SAVEUR</h3>
+        <p>Confectionery and pastry company active in the reception, storage, preparation and sale of cakes and pastries, with a steady focus on diversifying its portfolio and following new consumer trends. Its gluten-free and no-added-sugar range has brought in a new consumer segment.</p>
+        <ul>
+          <li>Beneficiary lead: Adina Iulia Morar</li>
+          <li>Role: defines product requirements and production constraints, hosts the transfer</li>
+          <li>Outcome: new high-protein gluten-free dessert under the SAVEUR brand</li>
+        </ul>
+      </article>
+      <article class="pc">
+        <span class="badge p">RDI service provider</span>
+        <div class="logo-row">
+          <span class="logo"><img src="https://usamv-research-projects.github.io/pro-oleogel/usamv.png" alt="USAMV Cluj-Napoca" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fb',textContent:'USAMV Cluj-Napoca'}))"></span>
+          <span class="logo"><img src="https://usamv-research-projects.github.io/pro-oleogel/sta.png" alt="Faculty of Food Science and Technology" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fb',textContent:'Faculty of Food Science and Technology'}))"></span>
+        </div>
+        <h3>University of Agricultural Sciences and Veterinary Medicine Cluj-Napoca</h3>
+        <p>Faculty of Food Science and Technology. Experience in developing and optimising pastry products, reformulating recipes with functional ingredients, and assessing food quality physico-chemically, microbiologically and sensorially. Selected over UBB and UMF Cluj-Napoca on quality-price ratio and an integrated methodology including INFOGEST validation.</p>
+        <ul>
+          <li>FTIR, HPLC, LC-MS and GC-MS, X-ray diffraction</li>
+          <li>SDS-PAGE and Western blotting platforms</li>
+          <li>Soxtherm (Gerhardt), Kjeldahl (VELP Scientifica), Nabertherm furnace, Binder ED23 oven</li>
+          <li>Controlled incubation and shaking systems</li>
+        </ul>
+        <p style="font-size:13.5px">Provider profile and research services listed on <a href="https://eertis.eu/" target="_blank" rel="noopener">EERTIS</a>.</p>
+      </article>
+    </div>
+    <div class="pfacts">
+      <dl class="facts" style="border-top:0">
+        <div><dt>Title</dt><dd>Development and characterisation of functional, gluten-free, high-protein mini-cheesecakes<br><span style="color:var(--muted);font-size:14px">Dezvoltarea și caracterizarea unor mini-cheesecake-uri funcționale, aglutenice și cu conținut proteic ridicat</span></dd></div>
+        <div><dt>Call</dt><dd>PNCDI IV, Innovation Voucher instrument (CEC)</dd></div>
+        <div><dt>Project code</dt><dd>PN-IV-P7-7.1-CI-2025-0067</dd></div>
+        <div><dt>Contract</dt><dd>38CI/2026</dd></div>
+        <div><dt>Period</dt><dd>2 July 2026 - 31 December 2026 (6 months)</dd></div>
+        <div><dt>Total value</dt><dd class="num">50,000 lei · public 45,000 lei · beneficiary 5,000 lei</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+
+<section id="contact">
+  <div class="wrap contact">
+    <div class="sec-head" style="margin:0">
+      <p class="eyebrow">Contact</p>
+      <h2>Get in touch</h2>
+      <p class="lead">For questions about the project, collaboration or the results, contact the project lead.</p>
+    </div>
+    <div class="cc">
+      <span class="eyebrow">Project lead</span>
+      <h3>Assoc. Prof. Dr. Eng. habil. Oana Lelia Pop</h3>
+      <p>Faculty of Food Science and Technology<br>University of Agricultural Sciences and Veterinary Medicine Cluj-Napoca<br>Calea Mănăștur 3-5, 400372 Cluj-Napoca, Romania</p>
+      <div class="mail"><code id="mail">oana.pop@usamvcluj.ro</code><button class="btn" id="copy" type="button">Copy address</button></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="ack">This project is funded by the Romanian Ministry of Education and Research, through UEFISCDI, under the National Plan for Research, Development and Innovation 2022-2027 (PNCDI IV), Innovation Voucher instrument, project code PN-IV-P7-7.1-CI-2025-0067, contract no. 38CI/2026.</p>
+    <div class="logo-row">
+      <span class="logo"><img src="https://usamv-research-projects.github.io/pro-oleogel/uefiscdi.png" alt="UEFISCDI" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fb',textContent:'UEFISCDI'}))"></span>
+      <span class="logo"><img src="https://usamv-research-projects.github.io/pro-oleogel/usamv.png" alt="USAMV Cluj-Napoca" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fb',textContent:'USAMV Cluj-Napoca'}))"></span>
+      <span class="logo"><img src="https://usamv-research-projects.github.io/pro-oleogel/sta.png" alt="Faculty of Food Science and Technology" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'fb',textContent:'FSTA'}))"></span>
+      <span class="logo"><img src="saveur.png" alt="SAVEUR"></span>
+    </div>
+    <p class="upd">Last updated: 15 October 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+const OBJ={
+  O1:{c:'var(--almond)',t:'Develop the recipe',d:'Develop an innovative recipe for functional, gluten-free mini-cheesecakes.'},
+  O2:{c:'var(--rasp)',t:'Optimise protein gelling',d:'Optimise and compare protein gelling systems for the cream: bovine gelatin vs micellar casein.'},
+  O3:{c:'var(--violet)',t:'Characterise the product',d:'Physico-chemical, nutritional, microbiological and sensory characterisation of the developed mini-cheesecakes.'},
+  O4:{c:'var(--leaf)',t:'Simulated digestion',d:'Evaluate product behaviour under simulated gastrointestinal digestion in vitro (INFOGEST).'}
+};
+const WPS=[
+  ['WP1','Base recipe for gluten-free mini-cheesecakes','Design and formulate the base recipe (gluten-free base and cream) and adapt the process to the product and to the beneficiary\'s production capacity.',['O1']],
+  ['WP2','Optimisation and comparison of protein gelling','Test bovine gelatin (control) and micellar casein (innovative alternative) and assess their effect on structure, stability and texture.',['O2']],
+  ['WP3','Physico-chemical and nutritional characterisation','Characterise the product and verify that it qualifies as "high protein" under current legislation.',['O3']],
+  ['WP4','Simulated gastrointestinal digestion in vitro','Apply a standardised in vitro digestion model to assess protein matrix stability and protein release.',['O4']],
+  ['WP5','Final validation and technology transfer','Integrate results, select the final variant and prepare the technical documentation for transfer to the beneficiary.',['O3','O4']]
+];
+// Weeks read from the Gantt chart of the funding application
+const ACTS=[
+  {id:'A1',o:'O1',wp:'WP1',s:1,e:6,team:['PL','M2'],t:'Experimental gluten-free variants',
+   d:'Formulate the base from almond flour, eggs and Green Sugar, and the initial quark and raspberry cream. Test variants to adjust the solid/cream phase ratio, hydration and process parameters (temperature, processing time) until the structure is stable.',
+   m:['Solid/cream phase ratio','Degree of hydration','Baking and setting temperature and time'],dl:'Base recipe for gluten-free mini-cheesecakes, with process parameters'},
+  {id:'A2',o:'O2',wp:'WP2',s:4,e:12,team:['PL','M1'],t:'Comparative testing of protein gelling agents',
+   d:'Compare bovine gelatin and micellar casein as structuring agents at different concentrations, hydration modes and incorporation conditions, under standardised conditions.',
+   m:['Rheology: apparent viscosity, flow curves (τ-γ)','Texture: firmness and cutting resistance by compression/penetration, controlled sample size and temperature','Cohesion, homogeneity and behaviour on portioning','Syneresis and phase separation during cold storage, pH, water activity (aw)'],dl:'Comparative report on the performance of the protein gelling systems'},
+  {id:'A3',o:'O3',wp:'WP3',s:8,e:14,team:['PL'],t:'Nutritional evaluation',
+   d:'Full proximate composition and nutritional profile, complemented by bioactive compounds.',
+   m:['Moisture; lipids (Soxhlet); total nitrogen (Kjeldahl, converted to protein); ash at 550 °C','Carbohydrates by HPLC-RID; amino acid profile by LC-MS; minerals by AAS','Total polyphenols (Folin-Ciocalteu); total flavonoids (AlCl3)'],dl:'Nutritional characterisation report and optimised protein formulation'},
+  {id:'A4',o:'O3',wp:'WP3',s:11,e:17,team:['PL','M1','M3'],t:'Microbiological quality',
+   d:'Monitor microbiological quality during cold storage at 4-6 °C.',
+   m:['Total viable count','Enterobacteriaceae, Escherichia coli','Staphylococcus aureus, Listeria monocytogenes, Salmonella'],dl:'Microbiological evaluation report'},
+  {id:'A5',o:'O3',wp:'WP3',s:13,e:19,team:['PL','M3'],t:'Sensory evaluation and shelf life',
+   d:'Hedonic test of overall acceptance and main attributes (appearance, texture, taste, aroma), with a Just-About-Right scale for key attribute intensities. Data from A2-A5 together set the shelf life.',
+   m:['Hedonic test','JAR: firmness, creaminess, taste intensity, aromatic balance','Shelf life from combined A2 + A3 + A4 + A5 data'],dl:'Sensory evaluation report (hedonic + JAR) and shelf life'},
+  {id:'A6',o:'O3',wp:'WP1-WP4',s:11,e:24,team:['PL','M1','M2','M3'],t:'Dissemination and visibility',
+   d:'A dedicated project website presents the objectives, the activities and the main results in a structured way.',
+   m:['Project website (this page)','Updates as results become available'],dl:'Project website'},
+  {id:'A7',o:'O4',wp:'WP4',s:14,e:20,team:['PL','M1','M2'],t:'Simulated gastrointestinal digestion in vitro',
+   d:'Digest the final variants sequentially with the INFOGEST protocol (oral, gastric, intestinal phases) and collect the bioaccessible intestinal fraction.',
+   m:['Soluble protein content','Amino acid profile, as a measure of protein digestibility','Antioxidant activity of the intestinal fraction'],dl:'Experimental report on protein release'},
+  {id:'A8',o:'O4',wp:'WP5',s:18,e:24,team:['PL','M1','M2','M3'],t:'Final validation and technology transfer',
+   d:'Integrate earlier results, select the final mini-cheesecake variant and adapt the recipe to the beneficiary\'s operations. Set final process parameters and the technical documentation for production under the SAVEUR brand.',
+   m:['Selection of the final variant','Final process parameters','Technical documentation for transfer'],dl:'Validated final prototype and technical documentation for technology transfer'}
+];
+const TEAM=[
+  {k:'PL',ini:'OP',c:'var(--rasp)',photo:'pop.jpg',role:'Project lead (PL)',name:'Assoc. Prof. Dr. Eng. habil. Oana Lelia Pop',
+   bio:'Vice-Dean for Research, Innovation and Development, Faculty of Food Science and Technology. Habilitation in Biotechnology (2023), PhD on probiotic encapsulation (2014), postdoc on nanostructured delivery of bioactives (2016). Director of 4 applied grants in a portfolio of 26 national and international projects, including UEFISCDI PCE and CI and an industrial contract with Biokuri B.V. (Belgium). 80 articles, more than 30 as first author, and more than 20 book chapters; over 100 invention awards, including 1st Prize at the EPO Innovation Contest (OSIM).',
+   tags:['h-index 35 (GS)','h-index 27 (WoS)','ISO 9001 / 22000']},
+  {k:'M1',ini:'CC',c:'var(--almond)',role:'Team member (M1)',name:'Dr. Eng. Călina Ciont',photo:'ciont.jpg',
+   bio:'Assistant lecturer at USAMV Cluj-Napoca since 2024; PhD in 2025, "Excellent - Summa cum laude". Works on nanotechnology for nutritional and functional value, protein quality by SDS-PAGE, fermentation for better nutrient absorption and Caco-2 cytotoxicity. Co-author of OSIM patent application ROA202200699A; industrial quality-control experience at FrieslandCampina. Member of PCE projects and the MSCA RISE project RIA4FOOD.',
+   tags:['h-index 10 (WoS)','24 articles','4 book chapters']},
+  {k:'M2',ini:'LP',c:'var(--violet)',photo:'lpop.jpg',role:'Team member (M2)',name:'PhD student Eng. Ligia Pop',
+   bio:'Second-year PhD student in Food Biotechnology, with a background in food engineering and control. Specialised in conformity and authenticity assessment and risk analysis (Food Safety and Consumer Protection). Her thesis develops probiotic-based strategies to improve nutrient bioavailability.',
+   tags:['Food safety','Bioavailability','Probiotics']},
+  {k:'M3',ini:'AC',c:'var(--leaf)',photo:'coman.jpg',role:'Team member (M3)',name:'PhD student Alina-Ionița Coman, RD',
+   bio:'First-year PhD student in Food Biotechnology and nutritionist-dietitian, trained at UMF Cluj-Napoca (Nutrition and Dietetics) and USAMV (MSc in Gastronomy, Nutrition and Dietetics). Brings the clinical and dietetic view needed to judge how composition and processing affect the end consumer.',
+   tags:['Clinical nutrition','Dietetics','Sensory']}
+];
+const $=s=>document.querySelector(s), h=(t,a={},html='')=>{const e=document.createElement(t);for(const k in a){if(k==='style')e.style.cssText=a[k];else e.setAttribute(k,a[k]);}if(html)e.innerHTML=html;return e;};
+
+/* berries on the cake */
+(function(){const g=$('#berries');const pos=[[130,150],[158,142],[186,147],[214,140],[242,146],[270,150],[150,160],[204,158],[256,160],[176,134],[228,132],[200,128]];
+ pos.forEach(([x,y],i)=>{const r=11-(i>8?1:0);let s='';for(let k=0;k<7;k++){const a=k/7*Math.PI*2;s+=`<circle cx="${(x+Math.cos(a)*r*.5).toFixed(1)}" cy="${(y+Math.sin(a)*r*.45).toFixed(1)}" r="${(r*.42).toFixed(1)}" fill="var(--rasp)" stroke="var(--bg)" stroke-width=".8"/>`;}
+ s+=`<circle cx="${x}" cy="${y}" r="${(r*.4).toFixed(1)}" fill="var(--rasp)"/>`;g.insertAdjacentHTML('beforeend',s);});
+ g.insertAdjacentHTML('beforeend','<path d="M196 122 q-14 -14 -26 -10 q10 8 26 10 M204 122 q12 -16 26 -12 q-10 9 -26 12" fill="var(--leaf)"/>');})();
+
+
+
+/* comparison table */
+(function(){const rows=[
+  {p:'Protein in ingredient',u:'%',min:0,max:100,g:[85,90],c:[90,90],gv:'85-90%',cv:'≈90%'},
+  {p:'Biological value (PDCAAS)',u:'',min:0,max:1,g:[0,.5,'ub'],c:[1,1],gv:'< 0.5',cv:'1.0'},
+  {p:'Typical use level in creams',u:'%',min:0,max:8,g:[1,3],c:[3,6],gv:'1-3%',cv:'3-6%'},
+  {p:'Water binding',u:'g/g protein',min:0,max:5,g:null,c:[3,4],gv:'not reported',cv:'3-4 g/g'},
+  {p:'Digestion',u:'h',min:0,max:8,g:null,c:[5,7],gv:'not reported',cv:'5-7 h, slow release'},
+  {p:'Gel formation',text:true,gv:'sets 20-30 °C, melts 30-35 °C',cv:'no classical thermal gelation'},
+  {p:'Dominant amino acids',text:true,gv:'Gly ≈33%, Pro + Hyp 22-25%',cv:'complete EAA, Leu 8-10%'}];
+ const tb=$('#cmp-body');
+ rows.forEach(r=>{const tr=h('tr');tr.appendChild(h('th',{scope:'row'},r.p));tr.appendChild(h('td',{class:'v'},r.gv));tr.appendChild(h('td',{class:'v'},r.cv));
+  const td=h('td',{class:'bar'});
+  if(r.text){td.innerHTML='<span style="font-size:13px;color:var(--muted)">qualitative</span>';}
+  else{const sc=v=>((v-r.min)/(r.max-r.min)*100);let html='<div class="track"><div class="ax"></div>';
+   const seg=(a,cls)=>{if(!a)return '';const l=sc(a[0]),w=Math.max(1.6,sc(a[1])-l);return `<div class="rg ${cls}${a[2]?' ub':''}" style="left:${l}%;width:${w}%"></div>`;};
+   html+=seg(r.g,'g')+seg(r.c,'c')+'</div>';
+   html+=`<div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted)"><span>${r.min}</span><span>${r.max} ${r.u}</span></div>`;td.innerHTML=html;}
+  tr.appendChild(td);tb.appendChild(tr);});})();
+
+/* objectives + WPs */
+(function(){const o=$('#objs');Object.entries(OBJ).forEach(([k,v])=>{o.appendChild(h('article',{class:'obj',style:`--c:${v.c}`},`<span class="code">${k}</span><h3>${v.t}</h3><p>${v.d.replace('in vitro','<em class="sp">in vitro</em>')}</p>`));});
+ const w=$('#wps');WPS.forEach(([id,t,d,os])=>{w.appendChild(h('div',{class:'wp'},`<span class="id">${id}</span><div><h4>${t.replace('in vitro','<em class="sp">in vitro</em>')}</h4><p>${d.replace('in vitro','<em class="sp">in vitro</em>')}</p></div><div class="os">${os.map(x=>`<span class="pill" style="--c:${OBJ[x].c}">${x}</span>`).join('')}</div>`));});})();
+
+/* gantt */
+(function(){const g=$('#gantt');const L=$('#glegend');
+ Object.entries(OBJ).forEach(([k,v])=>L.insertAdjacentHTML('beforeend',`<span><i style="background:${v.c}"></i>${k} ${v.t}</span>`));
+ g.appendChild(h('div',{class:'h lab'},'Activity'));g.appendChild(h('div',{class:'h lab'},'Team'));
+ for(let w=1;w<=24;w++)g.appendChild(h('div',{class:'h num'},String(w)));
+ ACTS.forEach(a=>{const row=h('div',{class:'row',role:'row',tabindex:'0','data-id':a.id,style:`--c:${OBJ[a.o].c}`,'aria-label':`${a.id} ${a.t}, weeks ${a.s} to ${a.e}`});
+  row.appendChild(h('div',{class:'c lab',role:'cell'},`<b>${a.id}</b><span title="${a.t}">${a.t.replace('in vitro','')}</span>`));
+  row.appendChild(h('div',{class:'c who',role:'cell'},['PL','M1','M2','M3'].map(k=>`<i class="${a.team.includes(k)?'on':''}">${k}</i>`).join('')));
+  for(let w=1;w<=24;w++){const c=h('div',{class:'c'+(w%2===0?' alt':''),role:'cell'});
+   if(w===a.s){c.appendChild(h('div',{class:'b',style:`left:2px;width:calc(${a.e-a.s+1}00% - 4px)`}));}
+   row.appendChild(c);}
+  g.appendChild(row);});
+ const sel=id=>{g.querySelectorAll('.row').forEach(r=>{const on=r.dataset.id===id;r.classList.toggle('sel',on&&!!id);r.classList.toggle('dim',!!id&&!on);});
+};
+ let cur=null;g.addEventListener('click',e=>{const r=e.target.closest('.row');if(!r)return;cur=cur===r.dataset.id?null:r.dataset.id;sel(cur);});
+ g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const r=e.target.closest('.row');if(r){e.preventDefault();r.click();}}});
+})();
+
+
+
+/* claim calculator */
+(function(){const f=['p','c','y','f','d'].reduce((o,k)=>(o[k]=$('#f-'+k),o),{});
+ const KC={p:4,c:4,y:2.4,f:9,d:2},KJ={p:17,c:17,y:10,f:37,d:8};
+ const col={p:'var(--rasp)',c:'var(--almond)',y:'var(--violet)',f:'var(--fg)',d:'var(--leaf)'};const lab={p:'protein',c:'carbohydrate',y:'polyols',f:'fat',d:'fibre'};
+ const calc=()=>{const v={};for(const k in f){v[k]=Math.max(0,parseFloat(f[k].value)||0);}
+  let kcal=0,kj=0;const e={};for(const k in v){e[k]=v[k]*KC[k];kcal+=e[k];kj+=v[k]*KJ[k];}
+  const pct=kcal>0?e.p/kcal*100:0;$('#o-pct').textContent=kcal>0?pct.toFixed(1):'-';
+  const V=$('#o-v');if(kcal===0){V.className='verdict no';V.textContent='Enter a composition';}
+  else if(pct>=20){V.className='verdict hi';V.textContent='Qualifies: "high protein"';}
+  else if(pct>=12){V.className='verdict src';V.textContent='Qualifies: "source of protein" only';}
+  else{V.className='verdict no';V.textContent='No protein claim';}
+  $('#o-fill').style.width=Math.min(100,pct*2)+'%';
+  $('#o-kcal').textContent=Math.round(kcal)+' kcal';$('#o-kj').textContent=Math.round(kj)+' kJ';
+  const rest=kcal-e.p;const need=rest>0?(0.25*rest/4)*4/4:0; // P such that 4P/(4P+rest)=0.2 -> P=rest/16
+  $('#o-need').textContent=kcal>0?(rest/16).toFixed(1)+' g':'-';
+  const bar=$('#o-bar');bar.innerHTML='';const keys=$('#o-keys');keys.innerHTML='';
+  for(const k of ['p','c','y','f','d']){if(e[k]>0&&kcal>0){bar.appendChild(h('i',{style:`width:${e[k]/kcal*100}%;background:${col[k]}`,title:lab[k]}));keys.insertAdjacentHTML('beforeend',`<span><i style="background:${col[k]}"></i>${lab[k]} ${(e[k]/kcal*100).toFixed(0)}%</span>`);}}};
+ $('#calc').addEventListener('input',calc);$('#calc').addEventListener('submit',e=>e.preventDefault());calc();})();
+
+
+/* team */
+(function(){const g=$('#teamgrid');TEAM.forEach(t=>{const card=h('article',{class:'mem',style:`--c:${t.c}`});
+ const ph=h('div',{class:'ph-img'},`<span class="ini">${t.ini}</span>`);
+ if(t.photo){const im=h('img',{src:t.photo,alt:t.name});im.onerror=()=>im.remove();ph.appendChild(im);}
+ card.appendChild(ph);card.appendChild(h('div',{class:'in'},`<span class="role">${t.role}</span><h3>${t.name}</h3><p>${t.bio}</p><div class="tags">${t.tags.map(x=>`<span>${x}</span>`).join('')}</div>`));g.appendChild(card);});})();
+
+
+/* copy */
+$('#copy').addEventListener('click',async()=>{const t=$('#mail').textContent,b=$('#copy');try{await navigator.clipboard.writeText(t);b.textContent='Copied';}catch(e){const r=document.createRange();r.selectNodeContents($('#mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C';}setTimeout(()=>b.textContent='Copy address',2200);});
+
+/* active nav */
+(function(){const links=[...document.querySelectorAll('.nav a.l')];const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+ if(!('IntersectionObserver' in window))return;const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));const a=map.get(e.target.id);if(a){a.classList.add('on');a.scrollIntoView({block:'nearest',inline:'nearest'});}}});},{rootMargin:'-45% 0px -50% 0px'});
+ document.querySelectorAll('section[id]').forEach(s=>io.observe(s));})();
+})();
+</script>
+
+</body>
+</html>
